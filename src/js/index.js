@@ -1,8 +1,8 @@
-import '../css/style.css';
 import 'grapesjs/dist/css/grapes.min.css';
+import '../css/style.css';
 import grapesjs from 'grapesjs';
 
-console.log('hello world');
+console.log('loading...');
 
 const editor = grapesjs.init({
     // Indicate where to init the editor. You can also pass an HTMLElement
@@ -11,7 +11,7 @@ const editor = grapesjs.init({
     // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
     fromElement: true,
     // Size of the editor
-    height: '300px',
+    height: '500px',
     width: 'auto',
     // Disable the storage manager for the moment
     storageManager: false,
@@ -19,3 +19,6 @@ const editor = grapesjs.init({
     panels: { defaults: [] },
 });
 
+console.log('loading completed');
+
+window.editor = editor;

@@ -6,6 +6,7 @@ module.exports = {
     output: {
         filename: 'bundle.js'
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -17,6 +18,11 @@ module.exports = {
                         presets: ['@babel/preset-env']
                     }
                 }
+            },
+            {
+                test: /\.js$/,
+                use: ["source-map-loader"],
+                enforce: "pre"
             },
             {
                 test: /\.css$/,
