@@ -54,8 +54,16 @@ const editor = grapesjs.init({
                 label: 'Styles',
                 command: 'show-styles',
                 togglable: false,
-            }],
-        }
+            },
+            {
+                id: 'show-traits',
+                active: true,
+                label: 'Traits',
+                command: 'show-traits',
+                togglable: false,
+            }
+            ],
+        },
         ]
     },
     // The Selector Manager allows to assign classes and
@@ -64,6 +72,9 @@ const editor = grapesjs.init({
     // but it's not mandatory
     selectorManager: {
         appendTo: '.styles-container'
+    },
+    traitManager: {
+        appendTo: '.traits-container',
     },
     styleManager: {
         appendTo: '.styles-container',
@@ -222,6 +233,18 @@ editor.Commands.add('show-styles', {
     stop(editor, sender) {
         const smEl = this.getStyleEl(this.getRowEl(editor));
         smEl.style.display = 'none';
+    },
+});
+editor.Commands.add('show-traits', {
+    getTraitsEl(editor) {
+        const row = editor.getContainer().closest('.editor-row');
+        return row.querySelector('.traits-container');
+    },
+    run(editor, sender) {
+        this.getTraitsEl(editor).style.display = '';
+    },
+    stop(editor, sender) {
+        this.getTraitsEl(editor).style.display = 'none';
     },
 });
 
