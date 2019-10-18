@@ -47,6 +47,27 @@ const editor = grapesjs.init({
 });
 
 
+editor.BlockManager.add('my-block-id', {
+    id: 'test',
+    label: 'Test',
+    content: {
+        tagName: 'div',
+        draggable: true,
+        attributes: { 'some-attribute': 'some-value' },
+        components: [
+            {
+                tagName: 'span',
+                content: '<b>Some static content</b>',
+            }, {
+                tagName: 'div',
+                // use `content` for static strings, `components` string will be parsed
+                // and transformed in Components
+                components: '<span>HTML at some point</span>',
+            }
+        ]
+    }
+});
+
 console.log('loading completed');
 
 window.editor = editor;
