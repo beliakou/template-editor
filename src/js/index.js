@@ -2,18 +2,25 @@ import 'grapesjs/dist/css/grapes.min.css';
 import '../css/style.css';
 import grapesjs from 'grapesjs';
 import templates from './htmls.js';
+import pluginBlocks from 'grapesjs-blocks-basic';
 
 console.log('loading...');
 
 const editor = grapesjs.init({
     // Indicate where to init the editor. You can also pass an HTMLElement
-    container: '#grjs',
+    container: '#gjs',
     // Get the content for the canvas directly from the element
     // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
     fromElement: true,
     // Size of the editor
     height: '300px',
     width: 'auto',
+    plugins: ['gjs-blocks-basic'],
+    pluginsOpts: {
+        'gjs-blocks-basic': {
+            blocks: ['column1', 'column2', 'column3']
+        }
+    },
     // Disable the storage manager for the moment
     storageManager: {
         id: 'gjs-',             // Prefix identifier that will be used inside storing and loading

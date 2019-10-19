@@ -24,6 +24,7 @@
     "webpack-dev-server": "^3.8.2"
   },
   "dependencies": {
-    "grapesjs": "^0.15.8"
+    "grapesjs": "^0.15.8",
+    "grapesjs-blocks-basic": "^0.1.7"
   }
 }
