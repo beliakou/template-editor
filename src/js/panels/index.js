@@ -60,19 +60,20 @@ export default (editor) => {
     editor.Panels.addPanel({
         id: 'panel-switcher',
         el: '.panel__switcher',
-        buttons: [{
-            id: 'show-layers',
-            active: true,
-            label: 'Layers',
-            command: 'show-layers',
-            // Once activated disable the possibility to turn it off
-            togglable: false,
-        },
+        buttons: [
         {
             id: 'show-style',
             active: true,
             label: 'Styles',
             command: 'show-styles',
+            togglable: false,
+        },
+        {
+            id: 'show-layers',
+            active: true,
+            label: 'Layers',
+            command: 'show-layers',
+            // Once activated disable the possibility to turn it off
             togglable: false,
         },
         {

@@ -5,6 +5,7 @@ import templates from './htmls.js';
 import pluginBlocks from 'grapesjs-blocks-basic';
 import panels from './panels';
 import commands from './commands';
+import blocks from './blocks';
 
 console.log('loading...');
 
@@ -17,12 +18,14 @@ const editor = grapesjs.init({
     // Size of the editor
     height: '300px',
     width: 'auto',
-    // plugins: ['gjs-blocks-basic'],
-    // pluginsOpts: {
-    //     'gjs-blocks-basic': {
-    //         blocks: ['column1', 'column2', 'column3']
-    //     }
-    // },
+    plugins: ['gjs-blocks-basic'],
+    pluginsOpts: {
+        'gjs-blocks-basic': {
+            blocks: ['column1', 'column2', 'column3'],
+            flexGrid: true,
+            // category: null
+        }
+    },
     // Disable the storage manager for the moment
     storageManager: false,
     // storageManager: {
@@ -56,9 +59,9 @@ const editor = grapesjs.init({
         appendTo: '.styles-container',
         sectors: [{
             name: 'Dimension',
-            open: false,
+            open: true,
             // Use built-in properties
-            buildProps: ['width', 'min-height', 'padding'],
+            buildProps: ['width', 'height'],
             // Use `properties` to define/override single property
             properties: [
                 {
@@ -70,6 +73,14 @@ const editor = grapesjs.init({
                     units: ['px', '%'], // Units, available only for 'integer' types
                     defaults: 'auto', // Default value
                     min: 0, // Min value, available only for 'integer' types
+                },
+                {
+                    property: 'height',
+                    type: 'integer',
+                    name: 'Height',
+                    units: ['px', '%'],
+                    default: 'auto',
+                    min: 0
                 }
             ]
         }, {
@@ -94,58 +105,14 @@ const editor = grapesjs.init({
         }]
     },
     blockManager: {
-        appendTo: '#blocks',
-        blocks: [
-            {
-                id: 'section', // id is mandatory
-                label: '<b>Section</b>', // You can use HTML/SVG inside labels
-                attributes: { class: 'gjs-block-section' },
-                content: templates.simpleSection,
-            }, {
-                id: 'text',
-                label: 'Text',
-                content: templates.textSection,
-            }, {
-                id: 'image',
-                label: 'Image',
-                // Select the component once it's dropped
-                select: true,
-                // You can pass components as a JSON instead of a simple HTML string,
-                // in this case we also use a defined component type `image`
-                content: { type: 'image' },
-                // This triggers `active` event on dropped components and the `image`
-                // reacts by opening the AssetManager
-                activate: true,
-            }
-        ]
+        appendTo: '#blocks'
     },
 });
 
 
-// editor.BlockManager.add('my-block-id', {
-//     id: 'test',
-//     label: 'Test',
-//     content: {
-//         tagName: 'div',
-//         draggable: true,
-//         attributes: { 'some-attribute': 'some-value' },
-//         components: [
-//             {
-//                 tagName: 'span',
-//                 content: '<b>Some static content</b>',
-//             }, {
-//                 tagName: 'div',
-//                 // use `content` for static strings, `components` string will be parsed
-//                 // and transformed in Components
-//                 components: '<span>HTML at some point</span>',
-//             }
-//         ]
-//     }
-// });
-
 panels(editor);
 commands(editor);
-
+blocks(editor);
 
 console.log('loading completed');
 
