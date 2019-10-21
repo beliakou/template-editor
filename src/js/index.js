@@ -2,10 +2,11 @@ import 'grapesjs/dist/css/grapes.min.css';
 import '../css/style.css';
 import grapesjs from 'grapesjs';
 import templates from './htmls.js';
-import pluginBlocks from 'grapesjs-blocks-basic';
+import pluginBlocks from './plugin/blocks';
 import panels from './panels';
 import commands from './commands';
 import blocks from './blocks';
+import events from './events';
 
 console.log('loading...');
 
@@ -21,7 +22,7 @@ const editor = grapesjs.init({
     plugins: ['gjs-blocks-basic'],
     pluginsOpts: {
         'gjs-blocks-basic': {
-            blocks: ['column1', 'column2', 'column3'],
+            blocks: ['column1', 'column2', 'column3', 'cell', 'row'],
             flexGrid: true,
             // category: null
         }
@@ -113,6 +114,9 @@ const editor = grapesjs.init({
 panels(editor);
 commands(editor);
 blocks(editor);
+events(editor);
+// editor.Canvas.getBody().className='gjs-dashed';
+
 
 console.log('loading completed');
 

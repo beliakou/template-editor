@@ -10,7 +10,7 @@ export default (editor) => {
         buttons: [
             {
                 id: 'test',
-                active: true,
+                active: false,
                 label: '<u>Test</u>',
                 command: () => console.log('test')
             },
