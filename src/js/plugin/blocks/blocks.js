@@ -14,6 +14,7 @@ export default function (editor, opt = {}) {
       align-items: stretch;
       flex-wrap: nowrap;
       padding: 10px;
+      max-height: 100%;
     }
     @media (max-width: 768px) {
       .${clsRow} {
@@ -34,6 +35,7 @@ export default function (editor, opt = {}) {
   const styleClm = flexGrid ? `
     .${clsCell} {
       min-height: 15px;
+      max-height: 100%;
       flex-grow: 1;
       flex-basis: 100%;
     }` : `
