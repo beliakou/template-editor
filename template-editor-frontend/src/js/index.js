@@ -43,7 +43,7 @@ const editor = grapesjs.init({
     layerManager: {
         appendTo: '.layers-container'
     },
-    panels: {defaults: []},
+    panels: { defaults: [] },
     // Avoid any default panel
     // panels: {},
     // The Selector Manager allows to assign classes and
@@ -119,5 +119,8 @@ events(editor);
 
 
 console.log('loading completed');
+
+const getBody = () => `<html><body>${editor.getHtml()}</body><style>${editor.getCss()}</style></html>`;
+window.getBody = getBody;
 
 window.editor = editor;

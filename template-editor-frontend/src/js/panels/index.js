@@ -12,7 +12,7 @@ export default (editor) => {
                 id: 'test',
                 active: false,
                 label: '<u>Test</u>',
-                command: () => console.log('test')
+                command: 'download-pdf'
             },
             {
                 id: 'visibility',

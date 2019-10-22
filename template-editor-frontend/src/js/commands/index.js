@@ -1,3 +1,22 @@
+// import download from 'download.js';
+let download = require('download.js');
+
+function downloadFile(html) {
+    let url = `http://localhost:3000/render`;
+    return fetch(url, {
+        method: 'POST',
+        cors: 'cors',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ 'html': html })
+    }).then(function (resp) {
+        return resp.blob();
+    }).then(function (blob) {
+        download.downloadBlob('html.pdf', blob);
+    });
+}
+
 export default (editor) => {
     // Define commands
     editor.Commands.add('show-layers', {
@@ -37,5 +56,12 @@ export default (editor) => {
         stop(editor, sender) {
             this.getTraitsEl(editor).style.display = 'none';
         },
+    });
+
+    editor.Commands.add('download-pdf', {
+        run(editor, sender) {
+            console.log('downloading');
+            downloadFile(`<html><head><style>${editor.getCss()}</style></head><body>${editor.getHtml()}</body></html>`);
+        }
     });
 };
