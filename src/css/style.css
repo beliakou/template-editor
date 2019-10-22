@@ -33,7 +33,11 @@
 }
 
 .editor-canvas {
+  display: flex;
+  justify-content: center;
   flex-grow: 1;
+  overflow: scroll;
+  background-color: rgb(212, 212, 212);
 }
 
 .panel__right {

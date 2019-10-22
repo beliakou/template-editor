@@ -18,7 +18,7 @@ const editor = grapesjs.init({
     fromElement: true,
     // Size of the editor
     height: '300px',
-    width: 'auto',
+    width: '800px',
     plugins: ['gjs-blocks-basic'],
     pluginsOpts: {
         'gjs-blocks-basic': {
