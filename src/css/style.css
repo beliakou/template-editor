@@ -29,23 +29,43 @@
   justify-content: flex-start;
   align-items: stretch;
   flex-wrap: nowrap;
-  height: 300px;
+  height: 100%;
+  overflow: scroll;
 }
 
 .editor-canvas {
   display: flex;
   justify-content: center;
   flex-grow: 1;
-  overflow: scroll;
+  flex-shrink: 0;
   background-color: rgb(212, 212, 212);
+  /* width: 800px; */
 }
 
 .panel__right {
   flex-basis: 230px;
-  position: relative;
+  /* position: relative; */
   overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.gjs-pn-panel {
+  position: initial;
 }
 
 .panel__switcher {
   position: initial;
+}
+
+.main-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+body {
+  padding: 0;
+  margin: 0;
 }
