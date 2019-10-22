@@ -34,6 +34,7 @@ export default function (editor, opt = {}) {
     }`;
   const styleClm = flexGrid ? `
     .${clsCell} {
+      padding: 5px;
       min-height: 15px;
       max-height: 100%;
       flex-grow: 1;
@@ -53,7 +54,7 @@ export default function (editor, opt = {}) {
     width: 70%;
   }`;
 
-  const step = 0.2;
+  const step = 1;
   const minDim = 1;
   const currentUnit = 1;
   const resizerBtm = { tl: 0, tc: 0, tr: 0, cl: 0, cr:0, bl:0, br: 0, minDim };
@@ -80,7 +81,7 @@ export default function (editor, opt = {}) {
   };
 
   if (flexGrid) {
-    colAttr['data-gjs-unstylable'] = ['width'];
+    colAttr['data-gjs-unstylable'] = ['height'];
     colAttr['data-gjs-stylable-require'] = ['flex-basis'];
   }
 

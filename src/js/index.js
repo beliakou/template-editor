@@ -22,7 +22,7 @@ const editor = grapesjs.init({
     plugins: ['gjs-blocks-basic'],
     pluginsOpts: {
         'gjs-blocks-basic': {
-            blocks: ['column1', 'column2', 'column3', 'cell', 'row'],
+            blocks: ['column1', 'column2', 'column3', 'cell', 'row', 'text'],
             flexGrid: true,
             // category: null
         }
@@ -69,10 +69,10 @@ const editor = grapesjs.init({
                     // Type of the input,
                     // options: integer | radio | select | color | slider | file | composite | stack
                     type: 'integer',
-                    name: 'The width', // Label for the property
+                    name: 'Width', // Label for the property
                     property: 'width', // CSS property (if buildProps contains it will be extended)
                     units: ['px', '%'], // Units, available only for 'integer' types
-                    defaults: 'auto', // Default value
+                    // defaults: 'auto', // Default value
                     min: 0, // Min value, available only for 'integer' types
                 },
                 {
@@ -80,7 +80,7 @@ const editor = grapesjs.init({
                     type: 'integer',
                     name: 'Height',
                     units: ['px', '%'],
-                    default: 'auto',
+                    // default: 'auto',
                     min: 0
                 }
             ]
