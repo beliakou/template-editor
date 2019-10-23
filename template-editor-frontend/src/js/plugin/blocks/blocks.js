@@ -15,11 +15,6 @@ export default function (editor, opt = {}) {
       flex-wrap: nowrap;
       padding: 10px;
       max-height: 100%;
-    }
-    @media (max-width: 768px) {
-      .${clsRow} {
-        flex-wrap: wrap;
-      }
     }` : `
     .${clsRow} {
       display: table;
