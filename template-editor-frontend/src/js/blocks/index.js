@@ -1,4 +1,4 @@
-import templates from '../htmls.js';
+import templates from './htmls.js';
 
 const defaultCategory = 'Text';
 

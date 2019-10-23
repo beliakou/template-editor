@@ -1,7 +1,6 @@
 import 'grapesjs/dist/css/grapes.min.css';
 import '../css/style.css';
 import grapesjs from 'grapesjs';
-import templates from './htmls.js';
 import pluginBlocks from './plugin/blocks';
 import panels from './panels';
 import commands from './commands';
@@ -113,7 +112,7 @@ const editor = grapesjs.init({
 
 panels(editor);
 commands(editor);
-blocks(editor);
+// blocks(editor);
 events(editor);
 // editor.Canvas.getBody().className='gjs-dashed';
 
