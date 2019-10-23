@@ -7,6 +7,8 @@ export default function (editor, opt = {}) {
   const flexGrid = c.flexGrid;
   const clsRow = `gjs-row`;
   const clsCell = `gjs-cell`;
+  const clsTableRow = 'gjs-table-row';
+  const clsTableCell = 'gjs-table-cell';
   const styleRow = flexGrid ? style.styleRowFlex : style.styleRowTable;
   const styleClm = flexGrid ? style.styleCellFlex : style.styleCellTable;
   const styleClm30 = style.styleClm30;
@@ -26,7 +28,7 @@ export default function (editor, opt = {}) {
 
   const rowAttr = {
     class: clsRow,
-    'data-gjs-droppable': `.${clsCell}`,
+    'data-gjs-droppable': `.${clsCell},.${clsTableRow}`,
     'data-gjs-resizable': resizerBtm,
     'data-gjs-name': 'Row',
   };
@@ -37,6 +39,19 @@ export default function (editor, opt = {}) {
     'data-gjs-resizable': resizerRight,
     'data-gjs-name': 'Cell',
   };
+
+  const tableRowAttr = {
+    class: clsTableRow,
+    'data-gjs-droppable': `.${clsTableCell}`,
+    // 'data-gjs-draggable': `.${clsRow}`,
+    'data-gjs-name': 'TableRow'
+  }
+
+  const tableColAttr = {
+    class: clsTableCell,
+    'data-gjs-draggable': `.${clsTableRow}`,
+    'data-gjs-name': 'TableRow'
+  }
 
   if (flexGrid) {
     colAttr['data-gjs-unstylable'] = ['height'];
@@ -51,6 +66,8 @@ export default function (editor, opt = {}) {
   const toAdd = name => blocks.indexOf(name) >= 0;
   const attrsRow = attrsToString(rowAttr);
   const attrsCell = attrsToString(colAttr);
+  const attrTableRow = attrsToString(tableRowAttr);
+  const attrTableCell = attrsToString(tableColAttr);
 
   toAdd('cell') && blockManager.add('cell', {
     label: 'Cell',
@@ -196,6 +213,21 @@ export default function (editor, opt = {}) {
       style: {height: '350px'}
     },
   });
+
+  blockManager.add('tableRow', {
+    label: 'Table Row',
+    category: c.category,
+    attributes: {},
+    content: `<tr data-gjs-type="text"></tr>`
+    // content: `<tr ${attrTableRow}></tr><style>${style.tableRowStyle}</style>`
+  });
+
+  blockManager.add('tableCol', {
+    label: 'Table Column',
+    category: c.category,
+    attributes: {},
+    content: `<td ${attrTableCell}></td><style>${style.tableCellStyle}</style>`
+  })
 }
 
 

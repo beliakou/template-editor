@@ -42,3 +42,15 @@ export const styleClm70 = `
 .gjs-cell70 {
   width: 70%;
 }`;
+
+export const tableRowStyle = `
+.gjs-table-row {
+  width: 100%;
+}
+`;
+
+export const tableCellStyle = `
+.gjs-table-cell {
+  width: 100%;
+}
+`
