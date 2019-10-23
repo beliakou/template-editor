@@ -1,53 +1,16 @@
+import * as style from './style';
+
 export default function (editor, opt = {}) {
   const c = opt;
-  let bm = editor.BlockManager;
+  let blockManager = editor.BlockManager;
   let blocks = c.blocks;
-  let stylePrefix = c.stylePrefix;
   const flexGrid = c.flexGrid;
-  const basicStyle = c.addBasicStyle;
-  const clsRow = `${stylePrefix}row`;
-  const clsCell = `${stylePrefix}cell`;
-  const styleRow = flexGrid ? `
-    .${clsRow} {
-      display: flex;
-      justify-content: flex-start;
-      align-items: stretch;
-      flex-wrap: nowrap;
-      padding: 10px;
-      max-height: 100%;
-    }` : `
-    .${clsRow} {
-      display: table;
-      padding: 10px;
-      width: 100%;
-    }
-    @media (max-width: 768px) {
-      .${stylePrefix}cell, .${stylePrefix}cell30, .${stylePrefix}cell70 {
-        width: 100%;
-        display: block;
-      }
-    }`;
-  const styleClm = flexGrid ? `
-    .${clsCell} {
-      padding: 5px;
-      min-height: 15px;
-      max-height: 100%;
-      flex-grow: 1;
-      flex-basis: 100%;
-    }` : `
-    .${clsCell} {
-      width: 8%;
-      display: table-cell;
-      height: 15px;
-    }`;
-  const styleClm30 = `
-  .${stylePrefix}cell30 {
-    width: 30%;
-  }`;
-  const styleClm70 = `
-  .${stylePrefix}cell70 {
-    width: 70%;
-  }`;
+  const clsRow = `gjs-row`;
+  const clsCell = `gjs-cell`;
+  const styleRow = flexGrid ? style.styleRowFlex : style.styleRowTable;
+  const styleClm = flexGrid ? style.styleCellFlex : style.styleCellTable;
+  const styleClm30 = style.styleClm30;
+  const styleClm70 = style.styleClm70;
 
   const step = 1;
   const minDim = 1;
@@ -85,117 +48,99 @@ export default function (editor, opt = {}) {
   editor.on('selector:add', selector =>
     privateCls.indexOf(selector.getFullName()) >= 0 && selector.set('private', 1))
 
-  const attrsToString = attrs => {
-    const result = [];
-
-    for (let key in attrs) {
-      let value = attrs[key];
-      const toParse = value instanceof Array || value instanceof Object;
-      value = toParse ? JSON.stringify(value) : value;
-      result.push(`${key}=${toParse ? `'${value}'` : `"${value}"`}`);
-    }
-
-    return result.length ? ` ${result.join(' ')}` : '';
-  }
-
   const toAdd = name => blocks.indexOf(name) >= 0;
   const attrsRow = attrsToString(rowAttr);
   const attrsCell = attrsToString(colAttr);
 
-  toAdd('cell') && bm.add('cell', {
+  toAdd('cell') && blockManager.add('cell', {
     label: 'Cell',
     attributes: {class:'gjs-fonts gjs-f-b1'},
     category: c.category,
-    content: `<div ${attrsCell}></div>${ basicStyle ?
-      `<style>
+    content: `
+      <div ${attrsCell}></div>
+      <style>
         ${styleRow}
         ${styleClm}
       </style>`
-      : ''}`
+      
   });
 
-  toAdd('row') && bm.add('row', {
+  toAdd('row') && blockManager.add('row', {
     label: 'Row',
     attributes: {class:'gjs-fonts gjs-f-b1'},
     category: c.category,
     content: `
-    <div ${attrsRow}></div>
-      ${ basicStyle ?
-      `<style>
+      <div ${attrsRow}></div>
+      <style>
         ${styleRow}
         ${styleClm}
       </style>`
-      : ''}`
   });
 
-  toAdd('column1') && bm.add('column1', {
-    label: c.labelColumn1,
+  toAdd('column1') && blockManager.add('column1', {
+    label: 'Column1',
     category: c.category,
     attributes: {class:'gjs-fonts gjs-f-b1'},
-    content: `<div ${attrsRow}>
+    content: `
+      <div ${attrsRow}>
         <div ${attrsCell}></div>
       </div>
-      ${ basicStyle ?
-        `<style>
+      <style>
           ${styleRow}
           ${styleClm}
-        </style>`
-        : ''}`
+      </style>`
   });
 
-  toAdd('column2') && bm.add('column2', {
-    label: c.labelColumn2,
+  toAdd('column2') && blockManager.add('column2', {
+    label: 'Column2',
     attributes: {class:'gjs-fonts gjs-f-b2'},
     category: c.category,
-    content: `<div ${attrsRow}>
+    content: `
+      <div ${attrsRow}>
         <div ${attrsCell}></div>
         <div ${attrsCell}></div>
       </div>
-      ${ basicStyle ?
-        `<style>
+      <style>
           ${styleRow}
           ${styleClm}
-        </style>`
-        : ''}`
+      </style>`
   });
 
-  toAdd('column3') && bm.add('column3', {
-    label: c.labelColumn3,
+  toAdd('column3') && blockManager.add('column3', {
+    label: 'Column3',
     category: c.category,
     attributes: {class:'gjs-fonts gjs-f-b3'},
-    content: `<div ${attrsRow}>
+    content: `
+      <div ${attrsRow}>
         <div ${attrsCell}></div>
         <div ${attrsCell}></div>
         <div ${attrsCell}></div>
       </div>
-      ${ basicStyle ?
-        `<style>
+      <style>
           ${styleRow}
           ${styleClm}
-        </style>`
-        : ''}`
+      </style>`
   });
 
-  toAdd('column3-7') && bm.add('column3-7', {
-    label: c.labelColumn37,
+  toAdd('column3-7') && blockManager.add('column3-7', {
+    label: 'Column3-7',
     category: c.category,
     attributes: {class:'gjs-fonts gjs-f-b37'},
-    content: `<div ${attrsRow}>
+    content: `
+      <div ${attrsRow}>
         <div ${attrsCell} style="${flexGrid ? 'flex-basis' : 'width'}: 30%;"></div>
         <div ${attrsCell} style="${flexGrid ? 'flex-basis' : 'width'}: 70%;"></div>
       </div>
-      ${ basicStyle ?
-        `<style>
+      <style>
           ${styleRow}
           ${styleClm}
           ${styleClm30}
           ${styleClm70}
-        </style>`
-        : ''}`
+      </style>`
   });
 
-  toAdd('text') && bm.add('text', {
-    label: c.labelText,
+  toAdd('text') && blockManager.add('text', {
+    label: 'Text',
     category: c.category,
     attributes: {class:'gjs-fonts gjs-f-text'},
     content: {
@@ -206,8 +151,8 @@ export default function (editor, opt = {}) {
     },
   });
 
-  toAdd('link') && bm.add('link', {
-    label: c.labelLink,
+  toAdd('link') && blockManager.add('link', {
+    label: 'Link',
     category: c.category,
     attributes: {class:'fa fa-link'},
     content: {
@@ -217,8 +162,8 @@ export default function (editor, opt = {}) {
     },
   });
 
-  toAdd('image') && bm.add('image', {
-    label: c.labelImage,
+  toAdd('image') && blockManager.add('image', {
+    label: 'Image',
     category: c.category,
     attributes: {class:'gjs-fonts gjs-f-image'},
     content: {
@@ -228,8 +173,8 @@ export default function (editor, opt = {}) {
     },
   });
 
-  toAdd('video') && bm.add('video', {
-    label: c.labelVideo,
+  toAdd('video') && blockManager.add('video', {
+    label: 'Video',
     category: c.category,
     attributes: {class:'fa fa-youtube-play'},
     content: {
@@ -242,8 +187,8 @@ export default function (editor, opt = {}) {
     },
   });
 
-  toAdd('map') && bm.add('map', {
-    label: c.labelMap,
+  toAdd('map') && blockManager.add('map', {
+    label: 'Map',
     category: c.category,
     attributes: {class:'fa fa-map-o'},
     content: {
@@ -251,4 +196,18 @@ export default function (editor, opt = {}) {
       style: {height: '350px'}
     },
   });
+}
+
+
+const attrsToString = function(attrs) {
+  const result = [];
+
+  for (let key in attrs) {
+    let value = attrs[key];
+    const toParse = value instanceof Array || value instanceof Object;
+    value = toParse ? JSON.stringify(value) : value;
+    result.push(`${key}=${toParse ? `'${value}'` : `"${value}"`}`);
+  }
+
+  return result.length ? ` ${result.join(' ')}` : '';
 }
