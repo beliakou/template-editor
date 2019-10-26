@@ -1,4 +1,5 @@
 import * as style from './style';
+import table from './table';
 
 export default function (editor, opt = {}) {
   const c = opt;
@@ -214,20 +215,7 @@ export default function (editor, opt = {}) {
     },
   });
 
-  blockManager.add('tableRow', {
-    label: 'Table Row',
-    category: c.category,
-    attributes: {},
-    content: `<tr data-gjs-type="text"></tr>`
-    // content: `<tr ${attrTableRow}></tr><style>${style.tableRowStyle}</style>`
-  });
-
-  blockManager.add('tableCol', {
-    label: 'Table Column',
-    category: c.category,
-    attributes: {},
-    content: `<td ${attrTableCell}></td><style>${style.tableCellStyle}</style>`
-  })
+  table(editor);
 }
 
 
