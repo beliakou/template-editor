@@ -49,6 +49,10 @@
   flex-shrink: 0;
 }
 
+.panel__right>div {
+  display: none;
+}
+
 .gjs-pn-panel {
   position: initial;
 }

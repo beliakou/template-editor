@@ -25,7 +25,7 @@ export default (editor) => {
 
         run(editor, sender) {
             const lmEl = this.getLayersEl(this.getRowEl(editor));
-            lmEl.style.display = '';
+            lmEl.style.display = 'initial';
         },
         stop(editor, sender) {
             const lmEl = this.getLayersEl(this.getRowEl(editor));
@@ -38,7 +38,7 @@ export default (editor) => {
 
         run(editor, sender) {
             const smEl = this.getStyleEl(this.getRowEl(editor));
-            smEl.style.display = '';
+            smEl.style.display = 'initial';
         },
         stop(editor, sender) {
             const smEl = this.getStyleEl(this.getRowEl(editor));
@@ -51,7 +51,7 @@ export default (editor) => {
             return row.querySelector('.traits-container');
         },
         run(editor, sender) {
-            this.getTraitsEl(editor).style.display = '';
+            this.getTraitsEl(editor).style.display = 'initial';
         },
         stop(editor, sender) {
             this.getTraitsEl(editor).style.display = 'none';

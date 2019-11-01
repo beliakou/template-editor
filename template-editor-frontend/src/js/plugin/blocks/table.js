@@ -263,13 +263,14 @@ export default editor => {
     });
 
     // INPUT
-    editor.DomComponents.addType('my-cell', {
+    editor.DomComponents.addType('my-row', {
         model: defaultModel.extend({
             defaults: {
                 ...defaultModel.prototype.defaults,
-                name: 'my-cell',
+                name: 'my-row',
                 tagName: 'tr',
-                draggable: 'tbody, tbody *',
+                // draggable: 'tbody, tbody *',
+                draggable: true,
                 droppable: false,
                 traits: [
                     // nameTrait,
@@ -289,7 +290,7 @@ export default editor => {
         }, {
             isComponent(el) {
                 if (el.tagName === 'TR' && el.className.includes(tableRowClass)) {
-                    return { type: 'my-row-table' };
+                    return { type: 'my-row' };
                 }
             },
         }),
@@ -341,19 +342,19 @@ export default editor => {
     //     }
     // });
 
-    editor.DomComponents.addType('my-table-body-type', {
-        // Make the editor understand when to bind `my-input-type`
-        isComponent: el => el.tagName === 'TBODY' && el.className.includes(tableBodyClass),
+    // editor.DomComponents.addType('my-table-body-type', {
+    //     // Make the editor understand when to bind `my-input-type`
+    //     isComponent: el => el.tagName === 'TBODY' && el.className.includes(tableBodyClass),
 
-        // Model definitionrow
-        model: {
-            // Default properties
-            defaults: {
-                draggable: true,
-                droppable: true
-            },
-        }
-    });
+    //     // Model definitionrow
+    //     model: {
+    //         // Default properties
+    //         defaults: {
+    //             draggable: true,
+    //             droppable: true
+    //         },
+    //     }
+    // });
 
     // editor.DomComponents.addType('my-table-row-type', {
     //     // Make the editor understand when to bind `my-input-type`
@@ -433,7 +434,7 @@ export default editor => {
         category: 'Tables',
         content: `<table style="width: 100px; height: 50px" class="${tableClass}">
             <tbody style="width: 100%; height: 100%!important" class="${tableBodyClass}">
-                <tr></tr>    
+            <tr class="${tableRowClass}"></tr>  
             </tbody>
         </table>
         <style>
