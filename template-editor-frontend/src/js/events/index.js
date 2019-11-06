@@ -10,4 +10,18 @@ export default editor => {
             alert('Cell cannot be placed here! Place Cell inside of a Row');
         }
     });
+    editor.on('canvas:dragend', ds => {
+        console.log(ds);
+    });
+    editor.on('block:drag:stop', model => {
+        if (model.get('type') == 'table') { 
+            editor.select(model);
+            model.findType('cell')[0].remove();
+            var row = model.findType('row');
+            row[0].append({type: 'cell', content: "hello"});
+            row[0].append({type: 'cell', content: "world"});
+            row[0].append({type: 'cell', content: "!!!"});
+        }
+        
+    });
 }

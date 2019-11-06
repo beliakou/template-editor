@@ -117,7 +117,7 @@ panels(editor);
 commands(editor);
 // blocks(editor);
 events(editor);
-editor.Canvas.getBody().className='gjs-dashed';
+editor.Canvas.getBody().className = 'gjs-dashed';
 editor.runCommand('show-layers');
 
 console.log('loading completed');
